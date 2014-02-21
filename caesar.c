@@ -17,9 +17,7 @@ int main(int argc, string argv[])
 //Verify the command-line argument exists
     string phrase = "";
     int k;
-    int ALPHABET = 26;
-    int UPPERLIMIT = 90;
-    int LOWERLIMIT = 122;
+    
     if (argc != 2)
         {
             printf("Try again with a positive number\n");
@@ -38,31 +36,26 @@ int main(int argc, string argv[])
         }
         
     //Shift the characters using the command-line input
-    for (int i = 0, n = strlen(phrase); i < n - 1; i++)
-        {
-            
+    for (int i = 0, n = strlen(phrase); i <= n - 1; i++)
+        {            
             if (isalpha(phrase[i]))
             {
                 char b = phrase[i]; 
-                if (isupper(b) && (b > UPPERLIMIT))
+                if ((isupper(b) && ((b + k) > 90)) || (islower(b) && ((b + k) > 122))
                 {
-                    b = b - (ALPHABET - (k % ALPHABET));
-                    printf("Found an uppercase\n");
+                    b = b - (26 - k);
+                    printf("%c!", b);
                 }
-                else if (islower(b) && (b > LOWERLIMIT))
-                {
-                    b = b - (ALPHABET - (k % ALPHABET));
-                    printf("Found a lowercase\n"); 
-                }
-                else
+                
+                else 
                 {
                     b = b + k;
-                    printf("%c", b);
+                    printf("%c?", b);
                 }
             }
             else 
             {
-                printf("%c", phrase[i]);
+                printf("%c,", phrase[i]);
             }
             
         }
