@@ -41,29 +41,22 @@ int main(int argc, string argv[])
             if (isalpha(phrase[i]))
             {
                 char b = phrase[i]; 
-                if ((isupper(b) && ((b + k) > 90)) || (islower(b) && ((b + k) > 122))
+                if ((isupper(b) && ((b + k) > 90)) || (islower(b) && ((b + k) > 122)))
                 {
                     b = b - (26 - k);
-                    printf("%c!", b);
+                    printf("%c", b);
                 }
                 
                 else 
                 {
                     b = b + k;
-                    printf("%c?", b);
+                    printf("%c", b);
                 }
             }
             else 
             {
-                printf("%c,", phrase[i]);
+                printf("%c", phrase[i]);
             }
-            
         }
       printf("\n");  
-//      printf("%d\n", k);
-
-
-//Change the new integers into characters
-//Output encrypted string, non-alphabetical characters are unchanged
-
 }
