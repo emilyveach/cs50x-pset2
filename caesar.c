@@ -17,6 +17,9 @@ int main(int argc, string argv[])
 //Verify the command-line argument exists
     string phrase = "";
     int k;
+    int ALPHABET = 26;
+    int UPPERLIMIT = 90;
+    int LOWERLIMIT = 122;
     if (argc != 2)
         {
             printf("Try again with a positive number\n");
@@ -24,13 +27,16 @@ int main(int argc, string argv[])
         }
     else
         {
-            //Convert the increment from a string to an integer
+            //Convert the cypher to an integer from a string 
             k = atoi(argv[1]);
+            //Set the cypher to be 1-26
+            k = k % 26;
+            
             //Ask the user for a string to be encrypted
             printf("Please enter a phrase to be encoded: \n");
             phrase = GetString();
-            printf("%s and %d \n", phrase, k);
         }
+        
     //Shift the characters using the command-line input
     for (int i = 0, n = strlen(phrase); i < n - 1; i++)
         {
@@ -38,8 +44,21 @@ int main(int argc, string argv[])
             if (isalpha(phrase[i]))
             {
                 char b = phrase[i]; 
-                b = b + k;
-                printf("%c", b);
+                if (isupper(b) && (b > UPPERLIMIT))
+                {
+                    b = b - (ALPHABET - (k % ALPHABET));
+                    printf("Found an uppercase\n");
+                }
+                else if (islower(b) && (b > LOWERLIMIT))
+                {
+                    b = b - (ALPHABET - (k % ALPHABET));
+                    printf("Found a lowercase\n"); 
+                }
+                else
+                {
+                    b = b + k;
+                    printf("%c", b);
+                }
             }
             else 
             {
@@ -48,7 +67,7 @@ int main(int argc, string argv[])
             
         }
       printf("\n");  
-//    printf("%s\n", phrase);
+//      printf("%d\n", k);
 
 
 //Change the new integers into characters
