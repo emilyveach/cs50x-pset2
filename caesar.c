@@ -31,7 +31,7 @@ int main(int argc, string argv[])
             k = k % 26;
             
             //Ask the user for a string to be encrypted
-            printf("Please enter a phrase to be encoded: \n");
+            //printf("Please enter a phrase to be encoded: \n");
             phrase = GetString();
         }
         
