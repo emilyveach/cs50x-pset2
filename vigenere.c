@@ -31,6 +31,19 @@ int main(int argc, string argv[])
             return 1;
         }
     }
+    
     string phrase = GetString();
+    for (int i = 0, n = strlen(phrase); i <= n; i++)
+    {
+        for (int j = 0; i <= n; j++)
+        {
+            if (j > (strlen(k)))
+            {
+                j = 0;
+                phrase[i] += k[j];
+            }
+        }
+    }
+    printf("%s\n", phrase);
 
 }
