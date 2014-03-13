@@ -33,17 +33,32 @@ int main(int argc, string argv[])
     }
     
     string phrase = GetString();
-    for (int i = 0, n = strlen(phrase); i <= n; i++)
+    for (int i = 0, n = strlen(phrase); i <= n - 1; i++)
     {
-        for (int j = 0; i <= n; j++)
+        for (int j = 0, m = strlen(k); j < m - 1; j++)
         {
+            printf("j is %d, i is %d, phrase[i] is %c; ", j, i, phrase[i]);
             if (j > (strlen(k)))
             {
                 j = 0;
-                phrase[i] += k[j];
             }
+            else if (isupper(phrase[i]))
+            {
+            phrase[i] = phrase[i] + (k[j] % 'A');
+            printf("Upper: %c ", phrase[i]);
+            }
+            else if (islower(phrase[i]))
+            {
+            phrase[i] = phrase[i] + (k[j] % 'a');
+            printf("Lower: %c ", phrase[i]);
+            }
+            else
+            {
+            phrase[i] = phrase[i];
+            printf("Other: %c ", phrase[i]);
+            }
+            printf("post j is %d, phrase[i] is %c\n", j, phrase[i]);
         }
     }
     printf("%s\n", phrase);
-
 }
