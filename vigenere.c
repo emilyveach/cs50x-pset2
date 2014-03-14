@@ -33,32 +33,38 @@ int main(int argc, string argv[])
     }
     
     string phrase = GetString();
+    
     for (int i = 0, n = strlen(phrase); i <= n - 1; i++)
     {
-        for (int j = 0, m = strlen(k); j < m - 1; j++)
+        char b = phrase[i];
+        
         {
-            printf("j is %d, i is %d, phrase[i] is %c; ", j, i, phrase[i]);
-            if (j > (strlen(k)))
+            int keywordlength = strlen(k);
+            char l = k[i % keywordlength];
+            //printf("%c\n", l);
+            
+            //printf("j is %d, i is %d, phrase[i] is %c; \n", j, i, b);
+            
+            if ((isupper(b) && isupper(l)) || (islower(b) && isupper(l)))
             {
-                j = 0;
+                b = b + (l % 'A');
+                printf("%c", b);            
+                //printf("Upper: %c ", b);
             }
-            else if (isupper(phrase[i]))
+            else if ((islower(b) && islower(l)) || (isupper(b) && islower(l)))
             {
-            phrase[i] = phrase[i] + (k[j] % 'A');
-            printf("Upper: %c ", phrase[i]);
+                b = b + (l % 'a');
+                printf("%c", b);
+                //printf("Lower: %c ", b);
             }
-            else if (islower(phrase[i]))
-            {
-            phrase[i] = phrase[i] + (k[j] % 'a');
-            printf("Lower: %c ", phrase[i]);
-            }
+            
             else
             {
-            phrase[i] = phrase[i];
-            printf("Other: %c ", phrase[i]);
+                printf("%c", b);
+                //printf("Other: %c ", b);
             }
-            printf("post j is %d, phrase[i] is %c\n", j, phrase[i]);
+            //printf("post j is %d, phrase[i] is %c\n", j, b);
         }
     }
-    printf("%s\n", phrase);
+    printf("\n");
 }
