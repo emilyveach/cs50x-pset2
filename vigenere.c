@@ -45,20 +45,19 @@ int main(int argc, string argv[])
         if ((isupper(phraseAt) && isupper(keywordAt)) || (islower(phraseAt) && isupper(keywordAt)))
         {
             phraseAt = phraseAt + (keywordAt % 'A');
-            printf("%c", phraseAt);
+            // printf("%c", phraseAt);
         }
+        
         // use a lowercase letter of the keyword to encrypt one letter of the phrase
         else if ((islower(phraseAt) && islower(keywordAt)) || (isupper(phraseAt) && islower(keywordAt)))
         {
-            phraseAt = phraseAt + (keywordAt % 'a');
-            printf("%c", phraseAt);
+            phraseAt = phraseAt + (keywordAt % 'a');        
+            // printf("%c", phraseAt);
         }
-
-        // don't encrypt, just print the non-alphabetical character
-        else
-        {
-            printf("%c", phraseAt);
-        }
+        
+        // print one letter at a time.
+        printf("%c", phraseAt);
+        
     }
     printf("\n");
 }
