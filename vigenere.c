@@ -33,36 +33,31 @@ int main(int argc, string argv[])
     }
     
     string phrase = GetString();
-    
+    int keywordlength = strlen(keyword);
+        
+    // go through the phrase
     for (int i = 0, n = strlen(phrase); i <= n - 1; i++)
     {
         char phraseAt = phrase[i];
+        char keywordAt = keyword[i % keywordlength];
         
+        // use an uppercase letter of the keyword to encrypt one letter of the phrase
+        if ((isupper(phraseAt) && isupper(keywordAt)) || (islower(phraseAt) && isupper(keywordAt)))
         {
-            int keywordlength = strlen(keyword);
-            char keywordAt = keyword[i % keywordlength];
-            //printf("%c\n", keywordAt);
-            
-            //printf("j is %d, i is %d, phrase[i] is %c; \n", j, i, phraseAt);
-            
-            if ((isupper(phraseAt) && isupper(keywordAt)) || (islower(phraseAt) && isupper(keywordAt)))
-            {
-                phraseAt = phraseAt + (keywordAt % 'A');
-                printf("%c", phraseAt);            
-                //printf("Upper: %c ", phraseAt);
-            }
-            else if ((islower(phraseAt) && islower(keywordAt)) || (isupper(phraseAt) && islower(keywordAt)))
-            {
-                phraseAt = phraseAt + (keywordAt % 'a');
-                printf("%c", phraseAt);
-                //printf("Lower: %c ", phraseAt);
-            }
-            
-            else
-            {
-                printf("%c", phraseAt);
-                //printf("Other: %c ", phraseAt);
-            }
+            phraseAt = phraseAt + (keywordAt % 'A');
+            printf("%c", phraseAt);
+        }
+        // use a lowercase letter of the keyword to encrypt one letter of the phrase
+        else if ((islower(phraseAt) && islower(keywordAt)) || (isupper(phraseAt) && islower(keywordAt)))
+        {
+            phraseAt = phraseAt + (keywordAt % 'a');
+            printf("%c", phraseAt);
+        }
+
+        // don't encrypt, just print the non-alphabetical character
+        else
+        {
+            printf("%c", phraseAt);
         }
     }
     printf("\n");
