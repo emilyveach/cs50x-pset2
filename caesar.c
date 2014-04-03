@@ -37,26 +37,36 @@ int main(int argc, string argv[])
         
     //Shift the characters using the command-line input
     for (int i = 0, n = strlen(phrase); i <= n - 1; i++)
-    {            
-        if (isalpha(phrase[i]))
+    {
+        char phraseAt = phrase[i];
+        char encrypted;
+        
+        if (isupper(phraseAt))
         {
-            char b = phrase[i]; 
-            if ((isupper(b) && ((b + k) > 90)) || (islower(b) && ((b + k) > 122)))
-            {
-                b = b - (26 - k);
-                printf("%c", b);
-            }
-            
-            else 
-            {
-                b = b + k;
-                printf("%c", b);
-            }
+            encrypted = phraseAt - 'A';
         }
-        else 
+        else if (islower(phraseAt))
         {
-            printf("%c", phrase[i]);
+            encrypted = phraseAt - 'a';
         }
+        else
+        {
+            printf("%c", phraseAt);
+            continue;
+        }
+        
+        encrypted += k;
+        encrypted = encrypted % 26;
+        
+        if (isupper(phraseAt))
+        {
+            encrypted += 'A';
+        }
+        else if (islower(phraseAt))
+        {
+            encrypted += 'a';
+        }
+        printf("%c", encrypted);
     }
     printf("\n");  
 }
