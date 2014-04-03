@@ -27,7 +27,7 @@ int main(int argc, string argv[])
     {
         //Convert the cypher to an integer from a string 
         k = atoi(argv[1]);
-        //Set the cypher to be 1-26
+        //Set the cypher to be 0-25
         k = k % 26;
         
         //Ask the user for a string to be encrypted
