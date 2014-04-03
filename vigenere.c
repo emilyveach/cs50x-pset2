@@ -62,7 +62,7 @@ int main(int argc, string argv[])
         */
         if (isupper(phraseAt))
         {
-            encrypted = phraseAt - 'A';  
+            encrypted = phraseAt - 'A';
         }
         else if (islower(phraseAt))
         {
@@ -95,27 +95,6 @@ int main(int argc, string argv[])
             encrypted += 'a';
         }
         printf("%c", encrypted);
-        
-        continue;
-        
-        // use an uppercase letter of the keyword to encrypt one letter of the phrase
-        if ((isupper(phraseAt) && isupper(keywordAt)) || (islower(phraseAt) && isupper(keywordAt)))
-        {
-            phraseAt = phraseAt + (keywordAt % 'A');
-            // printf("%c", phraseAt);
-        }
-        
-        // use a lowercase letter of the keyword to encrypt one letter of the phrase
-        else if ((islower(phraseAt) && islower(keywordAt)) || (isupper(phraseAt) && islower(keywordAt)))
-        {
-            phraseAt = phraseAt + (keywordAt % 'a');        
-            // printf("%c", phraseAt);
-        }
-        
-        // print one letter at a time.
-        
-        printf("%c", phraseAt);
-        
     }
     printf("\n");
 }
