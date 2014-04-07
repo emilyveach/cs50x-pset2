@@ -2,7 +2,7 @@
 *
 * Emily Veach
 * caesar.c
-* Encrypts a string using a Caesar cypher increment provided by the user
+* Encrypts a string using a Caesar cipher increment provided by the user
 * check50 2014/x/pset2/caesar caesar.c
 */
 
@@ -12,34 +12,19 @@
 #include <stdlib.h>
 #include <string.h>
 
-int main(int argc, string argv[])
+string phrase = "";
+int cipher;
+string encrypted_phrase = "";   
+ 
+string caesar_cipher()
 {
-    string phrase = "";
-    int k;
-
-    //Verify the command-line argument exists
-    if (argc != 2)
-    {
-        printf("Try again with a positive number\n");
-        return 1;
-    }
-    else
-    {
-        //Convert the cypher to an integer from a string 
-        k = atoi(argv[1]);
-        //Set the cypher to be 0-25
-        k = k % 26;
-        
-        //Ask the user for a string to be encrypted
-        //printf("Please enter a phrase to be encoded: \n");
-        phrase = GetString();
-    }
-        
+    
     //Shift the characters using the command-line input
     for (int i = 0, n = strlen(phrase); i <= n - 1; i++)
     {
         char phraseAt = phrase[i];
         char encrypted;
+        encrypted_phrase = phrase;
         
         if (isupper(phraseAt))
         {
@@ -51,11 +36,11 @@ int main(int argc, string argv[])
         }
         else
         {
-            printf("%c", phraseAt);
+            encrypted_phrase[i] = phraseAt;
             continue;
         }
         
-        encrypted += k;
+        encrypted += cipher;
         encrypted = encrypted % 26;
         
         if (isupper(phraseAt))
@@ -66,7 +51,31 @@ int main(int argc, string argv[])
         {
             encrypted += 'a';
         }
-        printf("%c", encrypted);
+        encrypted_phrase[i] = encrypted;
     }
-    printf("\n");  
+    
+    return encrypted_phrase;  
+}
+
+int main(int argc, string argv[])
+{
+    //Verify the command-line argument exists
+    if (argc != 2)
+    {
+        printf("Try again with a positive number\n");
+        return 1;
+    }
+    else
+    {
+        //Convert the cipher to an integer from a string 
+        cipher = atoi(argv[1]);
+        //Set the cypher to be 0-25
+        cipher = cipher % 26;
+        
+        //Ask the user for a string to be encrypted
+        phrase = GetString();
+        
+        //print the return of the caesar_cipher() function
+        printf("%s\n", caesar_cipher());
+    }
 }
