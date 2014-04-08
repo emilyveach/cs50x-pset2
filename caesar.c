@@ -12,50 +12,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-string phrase = "";
-int cipher;
-string encrypted_phrase = "";   
- 
-string caesar_cipher()
-{
-    
-    //Shift the characters using the command-line input
-    for (int i = 0, n = strlen(phrase); i <= n - 1; i++)
-    {
-        char phraseAt = phrase[i];
-        char encrypted;
-        encrypted_phrase = phrase;
-        
-        if (isupper(phraseAt))
-        {
-            encrypted = phraseAt - 'A';
-        }
-        else if (islower(phraseAt))
-        {
-            encrypted = phraseAt - 'a';
-        }
-        else
-        {
-            encrypted_phrase[i] = phraseAt;
-            continue;
-        }
-        
-        encrypted += cipher;
-        encrypted = encrypted % 26;
-        
-        if (isupper(phraseAt))
-        {
-            encrypted += 'A';
-        }
-        else if (islower(phraseAt))
-        {
-            encrypted += 'a';
-        }
-        encrypted_phrase[i] = encrypted;
-    }
-    
-    return encrypted_phrase;  
-}
+string caesar_cipher(int cipher, string phrase);
 
 int main(int argc, string argv[])
 {
@@ -68,14 +25,42 @@ int main(int argc, string argv[])
     else
     {
         //Convert the cipher to an integer from a string 
-        cipher = atoi(argv[1]);
+        int cipher = atoi(argv[1]);
+        string phrase = GetString();
+    
         //Set the cypher to be 0-25
         cipher = cipher % 26;
         
-        //Ask the user for a string to be encrypted
-        phrase = GetString();
-        
         //print the return of the caesar_cipher() function
-        printf("%s\n", caesar_cipher());
+        printf("%s\n", caesar_cipher(cipher, phrase));
     }
+}
+
+string caesar_cipher(int cipher, string phrase)
+{
+    string encrypted_phrase = phrase;
+    char phraseAt;
+    
+    //Shift the characters using the command-line input
+    for (int i = 0, n = strlen(phrase); i < n; i++)
+    {
+        phraseAt = phrase[i];
+        
+        if (!isalpha(phraseAt))
+        {
+            encrypted_phrase[i] = phraseAt;
+            continue;
+        }
+            
+        if (isupper(phraseAt))
+        {
+            encrypted_phrase[i] = (phraseAt - 'A' + cipher) % 26 + 'A';
+        }
+        else
+        {
+            encrypted_phrase[i] = (phraseAt - 'a' + cipher) % 26 + 'a';
+        }
+    }
+    
+    return encrypted_phrase;  
 }
