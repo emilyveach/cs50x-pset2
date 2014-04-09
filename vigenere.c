@@ -3,8 +3,7 @@
 * Emily Veach
 * vigenere.c
 * Encrypts a string using a Vigenere cypher 
-* check50 2014/x/pset2/caesar vignere.c
-* accept a single command-line argument: a keyword, k, composed entirely of alphabetical characters
+* check50 2014/x/pset2/vignere vignere.c
 */
 
 #include <cs50.h>
@@ -40,61 +39,24 @@ int main(int argc, string argv[])
     {
         char phraseAt = phrase[i];
         char keywordAt = keyword[k % keywordlength];
-        char encrypted;
-        //printf("p = %c, k = %c: o = ", phraseAt, keywordAt);
         
-        /*
-            A B C D E ...
-            0 1 2 3 4 ...
-            
-            a b c d e ...
-            0 1 2 3 4 ...
-            
-            p = A, k = A: o = A
-            p = B, k = B: o = C = (p-'A') + (k-'A') + 'A'
-            p = B, k = c: o = (p-'A') + (k-'a') + 'A' = 1 + 2 + 'A' = 'D'
-            p = C, k = z: o = (p-'A') + (k-'a') + 'A' = 2 + 25 + 'A' = 27 + 'A' = (27 % 26) + 'A' = 1 + 'A' = 'B'
-            p = b, k = b: o = 
-            phrase  = a b c
-            keyword = abc
-            p =  , k =  
-            p = b, k = b
-        */
         if (isupper(phraseAt))
         {
-            encrypted = phraseAt - 'A';
+            phrase[i] = (phraseAt - 'A') + (keywordAt - 'A') % 26 + 'A';
         }
         else if (islower(phraseAt))
         {
-            encrypted = phraseAt - 'a';
+            phrase[i] = (phraseAt - 'a') + (keywordAt - 'a') % 26 + 'a';
         }
         else
         {
+            printf("%c", phrase[i]);
             k--;
-            printf("%c", phraseAt);
             continue;
         }
-        
-        if (isupper(keywordAt))
-        {
-            encrypted += (keywordAt - 'A');
-        }
-        else
-        {
-            encrypted += (keywordAt - 'a');
-        }
-        
-        encrypted = encrypted % 26;
-        
-        if (isupper(phraseAt))
-        {
-            encrypted += 'A';
-        }
-        else if (islower(phraseAt))
-        {
-            encrypted += 'a';
-        }
-        printf("%c", encrypted);
+        printf("%c", phrase[i]);
     }
     printf("\n");
 }
+
+
