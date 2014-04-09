@@ -12,6 +12,9 @@
 #include <stdlib.h>
 #include <string.h>
 
+string caesar_cipher(int cipher, string phrase);
+string vigenere_cipher(string phrase, string keyword);
+
 int main(int argc, string argv[])
 {
     string keyword = argv[1];
@@ -32,31 +35,62 @@ int main(int argc, string argv[])
     }
     
     string phrase = GetString();
+    
+    printf("%s\n", vigenere_cipher(phrase, keyword));
+}
+
+
+
+string vigenere_cipher(string phrase, string keyword)
+{
     int keywordlength = strlen(keyword);
-        
-    // go through the phrase
+    
     for (int i = 0, k = 0, n = strlen(phrase); i < n; i++, k++)
     {
         char phraseAt = phrase[i];
         char keywordAt = keyword[k % keywordlength];
+        int cipher = keywordAt;
         
-        if (isupper(phraseAt))
+        if (isalpha(phraseAt))
         {
-            phrase[i] = (phraseAt - 'A') + (keywordAt - 'A') % 26 + 'A';
+            return caesar_cipher(cipher, phrase);
+            k++;
         }
-        else if (islower(phraseAt))
+        else 
         {
-            phrase[i] = (phraseAt - 'a') + (keywordAt - 'a') % 26 + 'a';
-        }
-        else
-        {
-            printf("%c", phrase[i]);
+            phraseAt = phrase[i];
             k--;
             continue;
         }
-        printf("%c", phrase[i]);
     }
-    printf("\n");
+    
+    return phrase;
 }
 
-
+string caesar_cipher(int cipher, string phrase)
+{
+    char phraseAt;
+    
+    //Shift the characters using the command-line input
+    for (int i = 0, n = strlen(phrase); i < n; i++)
+    {
+        phraseAt = phrase[i];
+        
+        if (!isalpha(phraseAt))
+        {
+            phrase[i] = phraseAt;
+            continue;
+        }
+            
+        if (isupper(phraseAt))
+        {
+            phrase[i] = (phraseAt - 'A' + cipher) % 26 + 'A';
+        }
+        else
+        {
+            phrase[i] = (phraseAt - 'a' + cipher) % 26 + 'a';
+        }
+    }
+    
+    return phrase;
+}
