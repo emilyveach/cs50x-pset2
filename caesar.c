@@ -38,7 +38,6 @@ int main(int argc, string argv[])
 
 string caesar_cipher(int cipher, string phrase)
 {
-    string encrypted_phrase = phrase;
     char phraseAt;
     
     //Shift the characters using the command-line input
@@ -48,19 +47,19 @@ string caesar_cipher(int cipher, string phrase)
         
         if (!isalpha(phraseAt))
         {
-            encrypted_phrase[i] = phraseAt;
+            phrase[i] = phraseAt;
             continue;
         }
             
         if (isupper(phraseAt))
         {
-            encrypted_phrase[i] = (phraseAt - 'A' + cipher) % 26 + 'A';
+            phrase[i] = (phraseAt - 'A' + cipher) % 26 + 'A';
         }
         else
         {
-            encrypted_phrase[i] = (phraseAt - 'a' + cipher) % 26 + 'a';
+            phrase[i] = (phraseAt - 'a' + cipher) % 26 + 'a';
         }
     }
     
-    return encrypted_phrase;  
+    return phrase;  
 }
